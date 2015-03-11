@@ -9,8 +9,9 @@ blah blah blah
 
 
 *Functional Logic*
-blah blah blah
+asddsaf
 
 
 *References*
-blah blah blah
+asdsfda
+asdfdsa

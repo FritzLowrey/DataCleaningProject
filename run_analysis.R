@@ -123,8 +123,11 @@ getBigFrame <- function(baseDir)
     print(thisRow)
     aRow <- full.list[[thisRow]]
     aRow <- aRow[c(3:length(aRow))] # trim the first 2 elements
+    
+    # every row has a subject and an activity
   	thisList <- list(Subjects[thisRow], as.character(Activities[thisRow]))
   	
+    # see data dictionary for definition of each element extracted from the input
     thisList <- append(thisList, aRow[c(1,2,3,4,5,6,41,42,43,44,45,46, 81,82,83,84,85,86,121,122,123,124,125,126,161,162,163,164,165,166,201,202,214,215,
                             227,228,240,241,253,254,266,267,268,269,270,271,345,346,347,348,349,350,424,425,426,427,428,429,503,504,516,517,529,
                             530,542,543)])  	                        
@@ -135,114 +138,7 @@ getBigFrame <- function(baseDir)
   	thisRow <- thisRow + 1
   }
   
-  return(big.frame)  
-  
-  for(thisSet in c("test", "train"))
-  {
-    # build up a file name for test or train 
-    thisFileName <- paste("X_", thisSet, ".txt", sep="")
-    thisFileName <- paste(baseDir, thisSet, thisFileName, sep="/")
-    print(thisFileName)
-    
-    con  <- file(thisFileName, open = "r")
-    
-    # read and import each line of the file
-    while (length(oneLine <- readLines(con, n = 1, warn = FALSE)) > 0) {
-      tempvec <- strsplit(oneLine," ")[[1]]
-      tempvec <- as.numeric(tempvec[c(3:length(tempvec))])
-      
-      print(thisRow)
-      
-      big.frame[thisRow,]$tBodyAcc.mean.X <- tempvec[1] #1 tBodyAcc-mean()-X
-      big.frame[thisRow,]$tBodyAcc.mean.Y <- tempvec[2] #2 tBodyAcc-mean()-Y
-      big.frame[thisRow,]$tBodyAcc.mean.Z <- tempvec[3] #3 tBodyAcc-mean()-Z
-      big.frame[thisRow,]$tBodyAcc.std.X  <- tempvec[4] #4 tBodyAcc-std()-X
-      big.frame[thisRow,]$tBodyAcc.std.Y  <- tempvec[5] #5 tBodyAcc-std()-Y
-      big.frame[thisRow,]$tBodyAcc.std.Z  <- tempvec[6] #6 tBodyAcc-std()-Z
-      
-      big.frame[thisRow,]$tGravityAcc.mean.X  <- tempvec[41] #41 tGravityAcc.mean.X
-      big.frame[thisRow,]$tGravityAcc.mean.Y  <- tempvec[42] #42 tGravityAcc.mean.Y
-      big.frame[thisRow,]$tGravityAcc.mean.Z  <- tempvec[43] #43 tGravityAcc.mean.Z
-      big.frame[thisRow,]$tGravityAcc.std.X  <- tempvec[44] #44 tGravityAcc.std.X
-      big.frame[thisRow,]$tGravityAcc.std.Y  <- tempvec[45] #45 tGravityAcc.std.Y
-      big.frame[thisRow,]$tGravityAcc.std.Z  <- tempvec[46] #46 tGravityAcc.std.Z
-      
-      big.frame[thisRow,]$tBodyAccJerk.mean.X  <- tempvec[81] #81 tBodyAccJerk.mean.X
-      big.frame[thisRow,]$tBodyAccJerk.mean.Y  <- tempvec[82] #82 tBodyAccJerk.mean.Y
-      big.frame[thisRow,]$tBodyAccJerk.mean.Z  <- tempvec[83] #83 tBodyAccJerk.mean.Z
-      big.frame[thisRow,]$tBodyAccJerk.std.X  <- tempvec[84] #84 tBodyAccJerk.std.X
-      big.frame[thisRow,]$tBodyAccJerk.std.Y  <- tempvec[85] #85 tBodyAccJerk.std.Y
-      big.frame[thisRow,]$tBodyAccJerk.std.Z  <- tempvec[86] #86 tBodyAccJerk.std.Z
-      
-      big.frame[thisRow,]$tBodyGyro.mean.X  <- tempvec[121] #121 tBodyGyro.mean.X
-      big.frame[thisRow,]$tBodyGyro.mean.Y  <- tempvec[122] #122 tBodyGyro.mean.Y
-      big.frame[thisRow,]$tBodyGyro.mean.Z  <- tempvec[123] #123 tBodyGyro.mean.Z
-      big.frame[thisRow,]$tBodyGyro.std.X  <- tempvec[124] #124 tBodyGyro.std.X
-      big.frame[thisRow,]$tBodyGyro.std.Y  <- tempvec[125] #125 tBodyGyro.std.Y
-      big.frame[thisRow,]$tBodyGyro.std.Z  <- tempvec[126] #126 tBodyGyro.std.Z
-      
-      big.frame[thisRow,]$tBodyGyroJerk.mean.X  <- tempvec[161] #161 tBodyGyroJerk-mean()-X
-      big.frame[thisRow,]$tBodyGyroJerk.mean.Y  <- tempvec[162] #162 tBodyGyroJerk-mean()-Y
-      big.frame[thisRow,]$tBodyGyroJerk.mean.Z  <- tempvec[163] #163 tBodyGyroJerk-mean()-Z
-      big.frame[thisRow,]$tBodyGyroJerk.std.X  <- tempvec[164] #164 tBodyGyroJerk-std()-X
-      big.frame[thisRow,]$tBodyGyroJerk.std.Y  <- tempvec[165] #165 tBodyGyroJerk-std()-Y
-      big.frame[thisRow,]$tBodyGyroJerk.std.Z  <- tempvec[166] #166 tBodyGyroJerk-std()-Z
-      
-      big.frame[thisRow,]$tBodyAccMag.mean  <- tempvec[201] #201 tBodyAccMag-mean()
-      big.frame[thisRow,]$tBodyAccMag.std   <- tempvec[202] #202 tBodyAccMag-std()
-      
-      big.frame[thisRow,]$tGravityAccMag.mean  <- tempvec[214] #214 tGravityAccMag-mean()
-      big.frame[thisRow,]$tGravityAccMag.std   <- tempvec[215] #215 tGravityAccMag-std()
-      
-      big.frame[thisRow,]$tBodyAccJerkMag.mean  <- tempvec[227] #227 tBodyAccJerkMag-mean()
-      big.frame[thisRow,]$tBodyAccJerkMag.std   <- tempvec[228] #228 tBodyAccJerkMag-std()
-      
-      big.frame[thisRow,]$tBodyGyroMag.mean  <- tempvec[240] #240 tBodyGyroMag-mean()
-      big.frame[thisRow,]$tBodyGyroMag.std   <- tempvec[241] #241 tBodyGyroMag-std()
-      
-      big.frame[thisRow,]$tBodyGyroJerkMag.mean  <- tempvec[253] #253 tBodyGyroJerkMag-mean()
-      big.frame[thisRow,]$tBodyGyroJerkMag.std   <- tempvec[254] #254 tBodyGyroJerkMag-std()
-      
-      big.frame[thisRow,]$fBodyAcc.mean.X  <- tempvec[266] #266 fBodyAcc-mean()-X
-      big.frame[thisRow,]$fBodyAcc.mean.Y  <- tempvec[267] #267 fBodyAcc-mean()-Y
-      big.frame[thisRow,]$fBodyAcc.mean.Z  <- tempvec[268] #268 fBodyAcc-mean()-Z
-      big.frame[thisRow,]$fBodyAcc.std.X  <- tempvec[269] #269 fBodyAcc-std()-X
-      big.frame[thisRow,]$fBodyAcc.std.Y  <- tempvec[270] #270 fBodyAcc-std()-Y
-      big.frame[thisRow,]$fBodyAcc.std.Z  <- tempvec[271] #271 fBodyAcc-std()-Z
-      
-      big.frame[thisRow,]$fBodyAccJerk.mean.X  <- tempvec[345] #345 fBodyAccJerk-mean()-X
-      big.frame[thisRow,]$fBodyAccJerk.mean.Y  <- tempvec[346] #346 fBodyAccJerk-mean()-Y
-      big.frame[thisRow,]$fBodyAccJerk.mean.Z  <- tempvec[347] #347 fBodyAccJerk-mean()-Z
-      big.frame[thisRow,]$fBodyAccJerk.std.X  <- tempvec[348] #348 fBodyAccJerk-std()-X
-      big.frame[thisRow,]$fBodyAccJerk.std.Y  <- tempvec[349] #349 fBodyAccJerk-std()-Y
-      big.frame[thisRow,]$fBodyAccJerk.std.Z  <- tempvec[350] #350 fBodyAccJerk-std()-Z
-      
-      big.frame[thisRow,]$fBodyGyro.mean.X  <- tempvec[424] #424 fBodyGyro-mean()-X
-      big.frame[thisRow,]$fBodyGyro.mean.Y  <- tempvec[425] #425 fBodyGyro-mean()-Y
-      big.frame[thisRow,]$fBodyGyro.mean.Z  <- tempvec[426] #426 fBodyGyro-mean()-Z
-      big.frame[thisRow,]$fBodyGyro.std.X  <- tempvec[427] #427 fBodyGyro-std()-X
-      big.frame[thisRow,]$fBodyGyro.std.Y  <- tempvec[428] #428 fBodyGyro-std()-Y
-      big.frame[thisRow,]$fBodyGyro.std.Z  <- tempvec[429] #429 fBodyGyro-std()-Z
-      
-      big.frame[thisRow,]$fBodyAccMag.mean <- tempvec[503] #503 fBodyAccMag-mean()
-      big.frame[thisRow,]$fBodyAccMag.std  <- tempvec[504] #504 fBodyAccMag-std()
-      
-      big.frame[thisRow,]$fBodyBodyAccJerkMag.mean <- tempvec[516] #516 fBodyBodyAccJerkMag-mean()
-      big.frame[thisRow,]$fBodyBodyAccJerkMag.std  <- tempvec[517] #517 fBodyBodyAccJerkMag-std()
-      
-      big.frame[thisRow,]$fBodyBodyGyroMag.mean <- tempvec[529] #529 fBodyBodyGyroMag-mean()
-      big.frame[thisRow,]$fBodyBodyGyroMag.std  <- tempvec[530] #530 fBodyBodyGyroMag-std()
-      
-      big.frame[thisRow,]$fBodyBodyGyroJerkMag.mean <- tempvec[542] #542 fBodyBodyGyroJerkMag-mean()
-      big.frame[thisRow,]$fBodyBodyGyroJerkMag.std  <- tempvec[543] #543 fBodyBodyGyroJerkMag-std()
-      
-      
-      thisRow <- thisRow + 1
-    }
-    close(con)
-  }
-  	
-	return(big.frame)
+  return(big.frame)    
 }
 
 # run_analysis: Perform consolidation and summarization of Sample input

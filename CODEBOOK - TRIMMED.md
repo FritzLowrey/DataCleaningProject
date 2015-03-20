@@ -6,7 +6,7 @@
 *Description*
 This file is created to preserve work done on cleaning the data. A separate file will be created representing the summary contents by participant and activity.
 
-*input fields in Cleaned File*
+*Fields in Cleaned File*
 The output table from the cleaning is the union of data from the test and training data provided in the input data. The subject column represents the "subject_x.txt" file and the activity column is a human readable version of the integer value from the "Y_x.txt" file. The remainder of the input fields are extracted from the "X_x.txt" data for each subject, parsed from the string and cast as numeric (real) values.
 
 Fields extracted were selected based on the desired use of "mean" and "std" (standard deviation) elements of the input data. Other fields with these strings in their names exist, but are derived data rather than captured input or post-processed contents (i.e. the FFT-based values to reduce noise and dropouts).

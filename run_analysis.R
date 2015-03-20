@@ -1,5 +1,5 @@
 
-# prettyActivity: take an integer activity value, return a string with the readable version
+# prettyActivity: take an integer activity value, return a string with the readable version based on activity_labels.txt
 prettyActivity <- function(x)
 {
   if(x == 1) return("WALKING")
@@ -11,6 +11,9 @@ prettyActivity <- function(x)
   else return("UNKNOWN")
 }
 
+# getBigFrame - merge the input files and select out the fields necessary for summarization (see Codebook for temp file)
+# input = directory for the test/train folders, default is getwd()
+# output = No return value but a global object called global.frame is created containing the merged, filtered data
 getBigFrame <- function(baseDir)
 {
   testFolder <- paste(baseDir, "test", sep="/")

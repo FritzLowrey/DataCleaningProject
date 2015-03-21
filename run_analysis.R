@@ -11,7 +11,8 @@ prettyActivity <- function(x)
   else return("UNKNOWN")
 }
 
-# getBigFrame - merge the input files and select out the fields necessary for summarization (see Codebook for temp file)
+# getBigFrame - merge the input files and select out the fields necessary for summarization (see "CODEBOOK - TRIMMED.md" for 
+# details)
 # input = directory for the test/train folders, default is getwd()
 # output = No return value but a global object called global.frame is created containing the merged, filtered data
 getBigFrame <- function(baseDir)
@@ -31,88 +32,88 @@ getBigFrame <- function(baseDir)
   big.frame <- data.frame(
     subject = integer(), 
     activity = character(),
-    tBodyAcc.mean.X = numeric(), # lapply(full.list, "[", 3),
-    tBodyAcc.mean.Y = numeric(), #= lapply(full.list, "[", 4),
-    tBodyAcc.mean.Z = numeric(), #= lapply(full.list, "[", 5),
-    tBodyAcc.std.X  = numeric(), #= lapply(full.list, "[", 6),
-    tBodyAcc.std.Y  = numeric(), #= lapply(full.list, "[", 7),
-    tBodyAcc.std.Z  = numeric(), #= lapply(full.list, "[", 8), #
+    tBodyAcc.mean.X = numeric(), 
+    tBodyAcc.mean.Y = numeric(),
+    tBodyAcc.mean.Z = numeric(),
+    tBodyAcc.std.X  = numeric(),
+    tBodyAcc.std.Y  = numeric(),
+    tBodyAcc.std.Z  = numeric(),
     
-	  tGravityAcc.mean.X  = numeric(), #= lapply(full.list, "[", 43), #41 tGravityAcc.mean.X
-    tGravityAcc.mean.Y  = numeric(), #= lapply(full.list, "[", 44), #42 tGravityAcc.mean.Y
-    tGravityAcc.mean.Z  = numeric(), #= lapply(full.list, "[", 45), #43 tGravityAcc.mean.Z
-    tGravityAcc.std.X  = numeric(), #= lapply(full.list, "[", 46), #44 tGravityAcc.std.X
-    tGravityAcc.std.Y  = numeric(), #= lapply(full.list, "[", 47), #45 tGravityAcc.std.Y
-    tGravityAcc.std.Z  = numeric(), #= lapply(full.list, "[", 48), #46 tGravityAcc.std.Z
+	  tGravityAcc.mean.X  = numeric(),
+    tGravityAcc.mean.Y  = numeric(),
+    tGravityAcc.mean.Z  = numeric(),
+    tGravityAcc.std.X  = numeric(),
+    tGravityAcc.std.Y  = numeric(),
+    tGravityAcc.std.Z  = numeric(),
     
-    tBodyAccJerk.mean.X  = numeric(), #= lapply(full.list, "[", 83), #81 tBodyAccJerk.mean.X
-    tBodyAccJerk.mean.Y  = numeric(), #= lapply(full.list, "[", 84), #82 tBodyAccJerk.mean.Y
-    tBodyAccJerk.mean.Z  = numeric(), #= lapply(full.list, "[", 85), #83 tBodyAccJerk.mean.Z
-    tBodyAccJerk.std.X  = numeric(), #= lapply(full.list, "[", 86), #84 tBodyAccJerk.std.X
-    tBodyAccJerk.std.Y  = numeric(), #= lapply(full.list, "[", 87), #85 tBodyAccJerk.std.Y
-    tBodyAccJerk.std.Z  = numeric(), # = lapply(full.list, "[", 88), #86 tBodyAccJerk.std.Z
+    tBodyAccJerk.mean.X  = numeric(),
+    tBodyAccJerk.mean.Y  = numeric(),
+    tBodyAccJerk.mean.Z  = numeric(),
+    tBodyAccJerk.std.X  = numeric(),
+    tBodyAccJerk.std.Y  = numeric(),
+    tBodyAccJerk.std.Z  = numeric(),
     
-    tBodyGyro.mean.X  = numeric(), #= lapply(full.list, "[", 123), #121 tBodyGyro.mean.X
-    tBodyGyro.mean.Y  = numeric(), #= lapply(full.list, "[", 124), #122 tBodyGyro.mean.Y
-    tBodyGyro.mean.Z  = numeric(), #= lapply(full.list, "[", 125), #123 tBodyGyro.mean.Z
-    tBodyGyro.std.X  = numeric(), #= lapply(full.list, "[", 126), #124 tBodyGyro.std.X
-    tBodyGyro.std.Y  = numeric(), #= lapply(full.list, "[", 127), #125 tBodyGyro.std.Y
-    tBodyGyro.std.Z  = numeric(), #= lapply(full.list, "[", 128), #126 tBodyGyro.std.Z
+    tBodyGyro.mean.X  = numeric(),
+    tBodyGyro.mean.Y  = numeric(),
+    tBodyGyro.mean.Z  = numeric(),
+    tBodyGyro.std.X  = numeric(),
+    tBodyGyro.std.Y  = numeric(),
+    tBodyGyro.std.Z  = numeric(),
     
-    tBodyGyroJerk.mean.X  = numeric(), #= lapply(full.list, "[", 163), #161 tBodyGyroJerk-mean()-X
-    tBodyGyroJerk.mean.Y  = numeric(), #= lapply(full.list, "[", 164), #162 tBodyGyroJerk-mean()-Y
-    tBodyGyroJerk.mean.Z  = numeric(), #= lapply(full.list, "[", 165), #163 tBodyGyroJerk-mean()-Z
-    tBodyGyroJerk.std.X  = numeric(), #= lapply(full.list, "[", 166), #164 tBodyGyroJerk-std()-X
-    tBodyGyroJerk.std.Y  = numeric(), #= lapply(full.list, "[", 167), #165 tBodyGyroJerk-std()-Y
-    tBodyGyroJerk.std.Z  = numeric(), #= lapply(full.list, "[", 168), #166 tBodyGyroJerk-std()-Z
+    tBodyGyroJerk.mean.X  = numeric(),
+    tBodyGyroJerk.mean.Y  = numeric(),
+    tBodyGyroJerk.mean.Z  = numeric(),
+    tBodyGyroJerk.std.X  = numeric(),
+    tBodyGyroJerk.std.Y  = numeric(),
+    tBodyGyroJerk.std.Z  = numeric(),
     
-    tBodyAccMag.mean  = numeric(), #= lapply(full.list, "[", 203), #201 tBodyAccMag-mean()
-    tBodyAccMag.std   = numeric(), #= lapply(full.list, "[", 204), #202 tBodyAccMag-std()
+    tBodyAccMag.mean  = numeric(),
+    tBodyAccMag.std   = numeric(),
     
-    tGravityAccMag.mean  = numeric(), #= lapply(full.list, "[", 216), #214 tGravityAccMag-mean()
-    tGravityAccMag.std   = numeric(), #= lapply(full.list, "[", 217), #215 tGravityAccMag-std()
+    tGravityAccMag.mean  = numeric(),
+    tGravityAccMag.std   = numeric(),
     
-    tBodyAccJerkMag.mean  = numeric(), #= lapply(full.list, "[", 229), #227 tBodyAccJerkMag-mean()
-    tBodyAccJerkMag.std   = numeric(), #= lapply(full.list, "[", 230), #228 tBodyAccJerkMag-std()
+    tBodyAccJerkMag.mean  = numeric(),
+    tBodyAccJerkMag.std   = numeric(),
     
-    tBodyGyroMag.mean  = numeric(), #= lapply(full.list, "[", 242), #240 tBodyGyroMag-mean()
-    tBodyGyroMag.std   = numeric(), #= lapply(full.list, "[", 243), #241 tBodyGyroMag-std()
+    tBodyGyroMag.mean  = numeric(),
+    tBodyGyroMag.std   = numeric(),
     
-    tBodyGyroJerkMag.mean  = numeric(), #= lapply(full.list, "[", 255), #253 tBodyGyroJerkMag-mean()
-    tBodyGyroJerkMag.std   = numeric(), #= lapply(full.list, "[", 256), #254 tBodyGyroJerkMag-std()
+    tBodyGyroJerkMag.mean  = numeric(),
+    tBodyGyroJerkMag.std   = numeric(),
     
-    fBodyAcc.mean.X  = numeric(), #= lapply(full.list, "[", 268), #266 fBodyAcc-mean()-X
-    fBodyAcc.mean.Y  = numeric(), #= lapply(full.list, "[", 269), #267 fBodyAcc-mean()-Y
-    fBodyAcc.mean.Z  = numeric(), #= lapply(full.list, "[", 270), #268 fBodyAcc-mean()-Z
-    fBodyAcc.std.X  = numeric(), #= lapply(full.list, "[", 271), #269 fBodyAcc-std()-X
-    fBodyAcc.std.Y  = numeric(), #= lapply(full.list, "[", 272), #270 fBodyAcc-std()-Y
-    fBodyAcc.std.Z  = numeric(), #= lapply(full.list, "[", 273), #271 fBodyAcc-std()-Z
+    fBodyAcc.mean.X  = numeric(),
+    fBodyAcc.mean.Y  = numeric(),
+    fBodyAcc.mean.Z  = numeric(),
+    fBodyAcc.std.X  = numeric(),
+    fBodyAcc.std.Y  = numeric(),
+    fBodyAcc.std.Z  = numeric(),
     
-    fBodyAccJerk.mean.X  = numeric(), #= lapply(full.list, "[", 347), #345 fBodyAccJerk-mean()-X
-    fBodyAccJerk.mean.Y  = numeric(), #= lapply(full.list, "[", 348), #346 fBodyAccJerk-mean()-Y
-    fBodyAccJerk.mean.Z  = numeric(), #= lapply(full.list, "[", 349), #347 fBodyAccJerk-mean()-Z
-    fBodyAccJerk.std.X  = numeric(), #= lapply(full.list, "[", 350), #348 fBodyAccJerk-std()-X
-    fBodyAccJerk.std.Y  = numeric(), #= lapply(full.list, "[", 352), #349 fBodyAccJerk-std()-Y
-    fBodyAccJerk.std.Z  = numeric(), #= lapply(full.list, "[", 353), #350 fBodyAccJerk-std()-Z
+    fBodyAccJerk.mean.X  = numeric(),
+    fBodyAccJerk.mean.Y  = numeric(),
+    fBodyAccJerk.mean.Z  = numeric(),
+    fBodyAccJerk.std.X  = numeric(),
+    fBodyAccJerk.std.Y  = numeric(),
+    fBodyAccJerk.std.Z  = numeric(),
     
-    fBodyGyro.mean.X  = numeric(), #= lapply(full.list, "[", 426), #424 fBodyGyro-mean()-X
-    fBodyGyro.mean.Y  = numeric(), #= lapply(full.list, "[", 427), #425 fBodyGyro-mean()-Y
-    fBodyGyro.mean.Z  = numeric(), #= lapply(full.list, "[", 428), #426 fBodyGyro-mean()-Z
-    fBodyGyro.std.X  = numeric(), #= lapply(full.list, "[", 429), #427 fBodyGyro-std()-X
-    fBodyGyro.std.Y  = numeric(), #= lapply(full.list, "[", 430), #428 fBodyGyro-std()-Y
-    fBodyGyro.std.Z  = numeric(), #= lapply(full.list, "[", 431), #429 fBodyGyro-std()-Z
+    fBodyGyro.mean.X  = numeric(),
+    fBodyGyro.mean.Y  = numeric(),
+    fBodyGyro.mean.Z  = numeric(),
+    fBodyGyro.std.X  = numeric(),
+    fBodyGyro.std.Y  = numeric(),
+    fBodyGyro.std.Z  = numeric(),
 
-    fBodyAccMag.mean  = numeric(), #= lapply(full.list, "[", 505), #503 fBodyAccMag-mean()
-    fBodyAccMag.std  = numeric(), #= lapply(full.list, "[", 506), #504 fBodyAccMag-std()
+    fBodyAccMag.mean  = numeric(),
+    fBodyAccMag.std  = numeric(),
     
-    fBodyBodyAccJerkMag.mean  = numeric(), #= lapply(full.list, "[", 518), #516 fBodyBodyAccJerkMag-mean()
-    fBodyBodyAccJerkMag.std  = numeric(), #= lapply(full.list, "[", 519), #517 fBodyBodyAccJerkMag-std()
+    fBodyBodyAccJerkMag.mean  = numeric(),
+    fBodyBodyAccJerkMag.std  = numeric(),
     
-    fBodyBodyGyroMag.mean  = numeric(), #= lapply(full.list, "[", 531), #529 fBodyBodyGyroMag-mean()
-    fBodyBodyGyroMag.std  = numeric(), #= lapply(full.list, "[", 532), #530 fBodyBodyGyroMag-std()
+    fBodyBodyGyroMag.mean  = numeric(),
+    fBodyBodyGyroMag.std  = numeric(),
     
-    fBodyBodyGyroJerkMag.mean  = numeric(), #= lapply(full.list, "[", 544), #542 fBodyBodyGyroJerkMag-mean()
-    fBodyBodyGyroJerkMag.std  = numeric(), #= lapply(full.list, "[", 545) #543 fBodyBodyGyroJerkMag-std()
+    fBodyBodyGyroJerkMag.mean  = numeric(),
+    fBodyBodyGyroJerkMag.std  = numeric(),
     stringsAsFactors =FALSE) ## end of dataframe	
 	
 	# memory hungry as heck with 500+ values per line and 10k+ record, but it makes the DF creation much easier and we should GC after we return
@@ -176,89 +177,89 @@ makeSummaryDF <- function()
   summaryDF <- data.frame(
     subject = integer(), 
     activity = character(),
-    mean.tBodyAcc.mean.X = numeric(), # lapply(full.list, "[", 3),
-    mean.tBodyAcc.mean.Y = numeric(), #= lapply(full.list, "[", 4),
-    mean.tBodyAcc.mean.Z = numeric(), #= lapply(full.list, "[", 5),
-    mean.tBodyAcc.std.X  = numeric(), #= lapply(full.list, "[", 6),
-    mean.tBodyAcc.std.Y  = numeric(), #= lapply(full.list, "[", 7),
-    mean.tBodyAcc.std.Z  = numeric(), #= lapply(full.list, "[", 8), #
+    mean.tBodyAcc.mean.X = numeric(),
+    mean.tBodyAcc.mean.Y = numeric(),
+    mean.tBodyAcc.mean.Z = numeric(),
+    mean.tBodyAcc.std.X  = numeric(),
+    mean.tBodyAcc.std.Y  = numeric(),
+    mean.tBodyAcc.std.Z  = numeric(),
     
-    mean.tGravityAcc.mean.X  = numeric(), #= lapply(full.list, "[", 43), #41 tGravityAcc.mean.X
-    mean.tGravityAcc.mean.Y  = numeric(), #= lapply(full.list, "[", 44), #42 tGravityAcc.mean.Y
-    mean.tGravityAcc.mean.Z  = numeric(), #= lapply(full.list, "[", 45), #43 tGravityAcc.mean.Z
-    mean.tGravityAcc.std.X  = numeric(), #= lapply(full.list, "[", 46), #44 tGravityAcc.std.X
-    mean.tGravityAcc.std.Y  = numeric(), #= lapply(full.list, "[", 47), #45 tGravityAcc.std.Y
-    mean.tGravityAcc.std.Z  = numeric(), #= lapply(full.list, "[", 48), #46 tGravityAcc.std.Z
+    mean.tGravityAcc.mean.X  = numeric(),
+    mean.tGravityAcc.mean.Y  = numeric(),
+    mean.tGravityAcc.mean.Z  = numeric(),
+    mean.tGravityAcc.std.X  = numeric(),
+    mean.tGravityAcc.std.Y  = numeric(),
+    mean.tGravityAcc.std.Z  = numeric(),
     
-    mean.tBodyAccJerk.mean.X  = numeric(), #= lapply(full.list, "[", 83), #81 tBodyAccJerk.mean.X
-    mean.tBodyAccJerk.mean.Y  = numeric(), #= lapply(full.list, "[", 84), #82 tBodyAccJerk.mean.Y
-    mean.tBodyAccJerk.mean.Z  = numeric(), #= lapply(full.list, "[", 85), #83 tBodyAccJerk.mean.Z
-    mean.tBodyAccJerk.std.X  = numeric(), #= lapply(full.list, "[", 86), #84 tBodyAccJerk.std.X
-    mean.tBodyAccJerk.std.Y  = numeric(), #= lapply(full.list, "[", 87), #85 tBodyAccJerk.std.Y
-    mean.tBodyAccJerk.std.Z  = numeric(), # = lapply(full.list, "[", 88), #86 tBodyAccJerk.std.Z
+    mean.tBodyAccJerk.mean.X  = numeric(),
+    mean.tBodyAccJerk.mean.Y  = numeric(),
+    mean.tBodyAccJerk.mean.Z  = numeric(),
+    mean.tBodyAccJerk.std.X  = numeric(),
+    mean.tBodyAccJerk.std.Y  = numeric(),
+    mean.tBodyAccJerk.std.Z  = numeric(),
     
-    mean.tBodyGyro.mean.X  = numeric(), #= lapply(full.list, "[", 123), #121 tBodyGyro.mean.X
-    mean.tBodyGyro.mean.Y  = numeric(), #= lapply(full.list, "[", 124), #122 tBodyGyro.mean.Y
-    mean.tBodyGyro.mean.Z  = numeric(), #= lapply(full.list, "[", 125), #123 tBodyGyro.mean.Z
-    mean.tBodyGyro.std.X  = numeric(), #= lapply(full.list, "[", 126), #124 tBodyGyro.std.X
-    mean.tBodyGyro.std.Y  = numeric(), #= lapply(full.list, "[", 127), #125 tBodyGyro.std.Y
-    mean.tBodyGyro.std.Z  = numeric(), #= lapply(full.list, "[", 128), #126 tBodyGyro.std.Z
+    mean.tBodyGyro.mean.X  = numeric(),
+    mean.tBodyGyro.mean.Y  = numeric(),
+    mean.tBodyGyro.mean.Z  = numeric(),
+    mean.tBodyGyro.std.X  = numeric(),
+    mean.tBodyGyro.std.Y  = numeric(),
+    mean.tBodyGyro.std.Z  = numeric(),
     
-    mean.tBodyGyroJerk.mean.X  = numeric(), #= lapply(full.list, "[", 163), #161 tBodyGyroJerk-mean()-X
-    mean.tBodyGyroJerk.mean.Y  = numeric(), #= lapply(full.list, "[", 164), #162 tBodyGyroJerk-mean()-Y
-    mean.tBodyGyroJerk.mean.Z  = numeric(), #= lapply(full.list, "[", 165), #163 tBodyGyroJerk-mean()-Z
-    mean.tBodyGyroJerk.std.X  = numeric(), #= lapply(full.list, "[", 166), #164 tBodyGyroJerk-std()-X
-    mean.tBodyGyroJerk.std.Y  = numeric(), #= lapply(full.list, "[", 167), #165 tBodyGyroJerk-std()-Y
-    mean.tBodyGyroJerk.std.Z  = numeric(), #= lapply(full.list, "[", 168), #166 tBodyGyroJerk-std()-Z
+    mean.tBodyGyroJerk.mean.X  = numeric(),
+    mean.tBodyGyroJerk.mean.Y  = numeric(),
+    mean.tBodyGyroJerk.mean.Z  = numeric(),
+    mean.tBodyGyroJerk.std.X  = numeric(),
+    mean.tBodyGyroJerk.std.Y  = numeric(),
+    mean.tBodyGyroJerk.std.Z  = numeric(),
     
-    mean.tBodyAccMag.mean  = numeric(), #= lapply(full.list, "[", 203), #201 tBodyAccMag-mean()
-    mean.tBodyAccMag.std   = numeric(), #= lapply(full.list, "[", 204), #202 tBodyAccMag-std()
+    mean.tBodyAccMag.mean  = numeric(),
+    mean.tBodyAccMag.std   = numeric(),
     
-    mean.tGravityAccMag.mean  = numeric(), #= lapply(full.list, "[", 216), #214 tGravityAccMag-mean()
-    mean.tGravityAccMag.std   = numeric(), #= lapply(full.list, "[", 217), #215 tGravityAccMag-std()
+    mean.tGravityAccMag.mean  = numeric(),
+    mean.tGravityAccMag.std   = numeric(),
     
-    mean.tBodyAccJerkMag.mean  = numeric(), #= lapply(full.list, "[", 229), #227 tBodyAccJerkMag-mean()
-    mean.tBodyAccJerkMag.std   = numeric(), #= lapply(full.list, "[", 230), #228 tBodyAccJerkMag-std()
+    mean.tBodyAccJerkMag.mean  = numeric(),
+    mean.tBodyAccJerkMag.std   = numeric(),
     
-    mean.tBodyGyroMag.mean  = numeric(), #= lapply(full.list, "[", 242), #240 tBodyGyroMag-mean()
-    mean.tBodyGyroMag.std   = numeric(), #= lapply(full.list, "[", 243), #241 tBodyGyroMag-std()
+    mean.tBodyGyroMag.mean  = numeric(),
+    mean.tBodyGyroMag.std   = numeric(),
     
-    mean.tBodyGyroJerkMag.mean  = numeric(), #= lapply(full.list, "[", 255), #253 tBodyGyroJerkMag-mean()
-    mean.tBodyGyroJerkMag.std   = numeric(), #= lapply(full.list, "[", 256), #254 tBodyGyroJerkMag-std()
+    mean.tBodyGyroJerkMag.mean  = numeric(),
+    mean.tBodyGyroJerkMag.std   = numeric(),
     
-    mean.fBodyAcc.mean.X  = numeric(), #= lapply(full.list, "[", 268), #266 fBodyAcc-mean()-X
-    mean.fBodyAcc.mean.Y  = numeric(), #= lapply(full.list, "[", 269), #267 fBodyAcc-mean()-Y
-    mean.fBodyAcc.mean.Z  = numeric(), #= lapply(full.list, "[", 270), #268 fBodyAcc-mean()-Z
-    mean.fBodyAcc.std.X  = numeric(), #= lapply(full.list, "[", 271), #269 fBodyAcc-std()-X
-    mean.fBodyAcc.std.Y  = numeric(), #= lapply(full.list, "[", 272), #270 fBodyAcc-std()-Y
-    mean.fBodyAcc.std.Z  = numeric(), #= lapply(full.list, "[", 273), #271 fBodyAcc-std()-Z
+    mean.fBodyAcc.mean.X  = numeric(),
+    mean.fBodyAcc.mean.Y  = numeric(),
+    mean.fBodyAcc.mean.Z  = numeric(),
+    mean.fBodyAcc.std.X  = numeric(),
+    mean.fBodyAcc.std.Y  = numeric(),
+    mean.fBodyAcc.std.Z  = numeric(),
     
-    mean.fBodyAccJerk.mean.X  = numeric(), #= lapply(full.list, "[", 347), #345 fBodyAccJerk-mean()-X
-    mean.fBodyAccJerk.mean.Y  = numeric(), #= lapply(full.list, "[", 348), #346 fBodyAccJerk-mean()-Y
-    mean.fBodyAccJerk.mean.Z  = numeric(), #= lapply(full.list, "[", 349), #347 fBodyAccJerk-mean()-Z
-    mean.fBodyAccJerk.std.X  = numeric(), #= lapply(full.list, "[", 350), #348 fBodyAccJerk-std()-X
-    mean.fBodyAccJerk.std.Y  = numeric(), #= lapply(full.list, "[", 352), #349 fBodyAccJerk-std()-Y
-    mean.fBodyAccJerk.std.Z  = numeric(), #= lapply(full.list, "[", 353), #350 fBodyAccJerk-std()-Z
+    mean.fBodyAccJerk.mean.X  = numeric(),
+    mean.fBodyAccJerk.mean.Y  = numeric(),
+    mean.fBodyAccJerk.mean.Z  = numeric(),
+    mean.fBodyAccJerk.std.X  = numeric(),
+    mean.fBodyAccJerk.std.Y  = numeric(),
+    mean.fBodyAccJerk.std.Z  = numeric(),
     
-    mean.fBodyGyro.mean.X  = numeric(), #= lapply(full.list, "[", 426), #424 fBodyGyro-mean()-X
-    mean.fBodyGyro.mean.Y  = numeric(), #= lapply(full.list, "[", 427), #425 fBodyGyro-mean()-Y
-    mean.fBodyGyro.mean.Z  = numeric(), #= lapply(full.list, "[", 428), #426 fBodyGyro-mean()-Z
-    mean.fBodyGyro.std.X  = numeric(), #= lapply(full.list, "[", 429), #427 fBodyGyro-std()-X
-    mean.fBodyGyro.std.Y  = numeric(), #= lapply(full.list, "[", 430), #428 fBodyGyro-std()-Y
-    mean.fBodyGyro.std.Z  = numeric(), #= lapply(full.list, "[", 431), #429 fBodyGyro-std()-Z
+    mean.fBodyGyro.mean.X  = numeric(),
+    mean.fBodyGyro.mean.Y  = numeric(),
+    mean.fBodyGyro.mean.Z  = numeric(),
+    mean.fBodyGyro.std.X  = numeric(), 
+    mean.fBodyGyro.std.Y  = numeric(),
+    mean.fBodyGyro.std.Z  = numeric(),
     
-    mean.fBodyAccMag.mean  = numeric(), #= lapply(full.list, "[", 505), #503 fBodyAccMag-mean()
-    mean.fBodyAccMag.std  = numeric(), #= lapply(full.list, "[", 506), #504 fBodyAccMag-std()
+    mean.fBodyAccMag.mean  = numeric(),
+    mean.fBodyAccMag.std  = numeric(),
     
-    mean.fBodyBodyAccJerkMag.mean  = numeric(), #= lapply(full.list, "[", 518), #516 fBodyBodyAccJerkMag-mean()
-    mean.fBodyBodyAccJerkMag.std  = numeric(), #= lapply(full.list, "[", 519), #517 fBodyBodyAccJerkMag-std()
+    mean.fBodyBodyAccJerkMag.mean  = numeric(),
+    mean.fBodyBodyAccJerkMag.std  = numeric(),
     
-    mean.fBodyBodyGyroMag.mean  = numeric(), #= lapply(full.list, "[", 531), #529 fBodyBodyGyroMag-mean()
-    mean.fBodyBodyGyroMag.std  = numeric(), #= lapply(full.list, "[", 532), #530 fBodyBodyGyroMag-std()
+    mean.fBodyBodyGyroMag.mean  = numeric(),
+    mean.fBodyBodyGyroMag.std  = numeric(),
     
-    mean.fBodyBodyGyroJerkMag.mean  = numeric(), #= lapply(full.list, "[", 544), #542 fBodyBodyGyroJerkMag-mean()
+    mean.fBodyBodyGyroJerkMag.mean  = numeric(),
     mean.fBodyBodyGyroJerkMag.std = numeric(),
-    stringsAsFactors = FALSE    
+    stringsAsFactors = FALSE    # important for setting the "Activity" to a string value where everything is a number
     )
   
   return(summaryDF)
@@ -266,7 +267,7 @@ makeSummaryDF <- function()
 
 # run_analysis: Perform consolidation and summarization of Sample input
 # Pre-req: set working directory to the folder containing the "test" and "train" subfolders
-#     e.g. ./myroot/getdata-projectfiles-UCI HAR Dataset
+#     e.g. "/myroot/getdata-projectfiles-UCI HAR Dataset"
 # Input: the base directory containing the "test" and "train" folders for the input data
 #         output file will be in this directory named RUN_ANALYSIS_SUMMARY from table.write()
 # Desired functionality:
@@ -280,7 +281,7 @@ makeSummaryDF <- function()
 ##Good luck!
 run_analysis <- function(baseDir = getwd())
 {  
-
+  # create a filename for my temp file
   tableFile <- paste(baseDir, "TRIMMED.txt", sep="/")
   
   # for debugging, if the file has already been created, load and use it. Otherwise, compute it from the input data
@@ -308,7 +309,7 @@ run_analysis <- function(baseDir = getwd())
   for(thisPart in participants)
   {
     for(thisActivity in activities)
-    {
+    {      
       listRow <- summarizeInfo(thisPart, thisActivity)
       dfRow <- data.frame(listRow, stringsAsFactors=FALSE)
       dfRow <- setNames(dfRow, names(dfSummary))
@@ -318,7 +319,7 @@ run_analysis <- function(baseDir = getwd())
   }
   
   # compose my output file name
-  summaryFile <- paste(baseDir, "SUMMARY.txt", sep="/")
+  summaryFile <- paste(baseDir, "MEAN SUMMARY.txt", sep="/")
   
   # sort the output by subject and activity - not required but easier to look at
   dfSummary <- dfSummary[with(dfSummary, order(subject, activity)),]
